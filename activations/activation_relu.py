@@ -1,6 +1,6 @@
 from activation_layer import ActivationLayer
 import numpy as np
-class ReLU(ActivationLayer):
+class ActivationReLU(ActivationLayer):
     """
     Rectified Linear Unit activation - removes negative values from the input data.
     """
