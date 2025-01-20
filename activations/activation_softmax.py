@@ -11,6 +11,3 @@ class SoftMax(ActivationLayer):
         self.NumberOfClasses = NumberOfClasses
     
     def forward(self):
-        """
-        
-        """
