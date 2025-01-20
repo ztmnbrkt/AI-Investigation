@@ -10,8 +10,8 @@ I've also realised that im missing a whole section of research into calculating 
     
     - cross entropy:
         using onehot encoding and prob. distributions, calculates the scale of the loss of a bad prediction:
-            Loss(estimations, target) = sum x of target * log(estimations * x)
+            Loss(estimations, target) = sum x of target * log(estimations * x), or smth like that 
 
 
 -- usage:
-    is calculated at the final layer and is used for the entire network on the backprop.
+    is calculated at the final layer, only once, and is used for the entire network on the backprop.
