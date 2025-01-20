@@ -11,7 +11,7 @@ ToDo:
  -x Dense
  
  - Activation (layer)
- -- ReLU
+ -x ReLU
  -- Sigmoid
  -- Softmax
  -- Convolutional
@@ -19,7 +19,7 @@ ToDo:
  --
 
  - Networks
- -- Layer Array
+ -- Layer Array? 
 
  - Datasets
  -- Data Normalisation

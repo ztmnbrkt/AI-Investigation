@@ -5,10 +5,8 @@ class ActivationLayer(layer.Layer):
     """
     Base class for all activation functions/layers, to be implemented by subclasses.
     """
-    def __init__(self, activation, activation_prime):
+    def __init__(self):
         super.__init__()
-        self.activation = activation
-        self.activation_prime = activation_prime
 
     @abstractmethod
     def forward():
