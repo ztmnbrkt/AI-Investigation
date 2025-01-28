@@ -4,8 +4,8 @@ class Layer(ABC):
     """
     Base class for all network layers.
     """
-    def __init__(self):
-        self.inputs = None
+    def __init__(self, inputs):
+        self.inputs = inputs
         self.outputs = None
 
     @abstractmethod
@@ -13,6 +13,7 @@ class Layer(ABC):
         """
         Abstract method performing the forward propagation for this layer given an input, to be implemented by subclasses.
         """
+        self.inputs = inputs
         ...
 
     @abstractmethod
@@ -24,4 +25,6 @@ class Layer(ABC):
             output_error: how "wrong" the network is, used in gradient calcualtions.
             learning_rate: a scaler for gradient calculations effect.
         """
+        self.output_error = output_error
+        self.learning_rate = learning_rate
         ...

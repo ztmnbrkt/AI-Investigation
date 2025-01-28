@@ -33,7 +33,7 @@ class LayerDense(Layer):
     
     def backward(self, output_error, learning_rate):
         """
-        Calculates input error dE/dX, weights error dE/dW and  bias error dE/dB for this layers output error dE/dY; 
+        Calculates input error dE/dX, weights error dE/dW and bias error dE/dB for this layers output error dE/dY; 
         Adjusts W and B accrodingly.
         
         Args:

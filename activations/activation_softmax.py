@@ -10,4 +10,4 @@ class SoftMax(ActivationLayer):
         super.__init__()
         self.NumberOfClasses = NumberOfClasses
     
-    def forward(self):
+    def forward(self, inputs):

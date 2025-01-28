@@ -9,9 +9,9 @@ class ActivationLayer(layer.Layer):
         super.__init__()
 
     @abstractmethod
-    def forward():
+    def forward(self, inputs):
         ...
 
     @abstractmethod
-    def backward():
+    def backward(self, learning_rate, output_error):
         ...
