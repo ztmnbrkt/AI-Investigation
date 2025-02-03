@@ -1,11 +1,11 @@
-from activation_layer import ActivationLayer
 import numpy as np
-class ReLU(ActivationLayer):
+from activations import activation_layer
+class ReLU(activation_layer.ActivationLayer):
     """
     Rectified Linear Unit activation - removes negative values from the input data.
     """
     def __init__(self):
-        super().__init__()
+        ...
     
     def forward(self, inputs):
         """
@@ -19,7 +19,7 @@ class ReLU(ActivationLayer):
             output: the transformed data
         """
         self.inputs = inputs
-        self.outputs = np.max(0, self.inputs)
+        self.outputs = np.maximum(0, self.inputs)
         return self.outputs
     
     def backward(self, learning_rate, output_error):

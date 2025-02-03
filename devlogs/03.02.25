@@ -1,0 +1,5 @@
+so, packaging in python is really confusing. it took me an hour to realise that i was 
+importing a file and usig it as a class instead of importing the class itself...
+
+init files are important in making each package easy to use. i cut out "activations" 
+dependancy on "layers" for troubleshooting, i think ill keep it this way.
