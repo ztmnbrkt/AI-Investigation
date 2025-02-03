@@ -22,9 +22,10 @@ class ReLU(ActivationLayer):
         self.outputs = np.max(0, self.inputs)
         return self.outputs
     
-    def backward(self):
+    def backward(self, learning_rate, error_rate):
         """
-        ReLU does not have a backward propogation.
+        ReLU's packpropagation is the same as it's forward: return x for all values x greater than 0.
+        As this has already calculeted in self.outputs, return self.outputs.
         """
         return self.outputs
         ...
