@@ -12,7 +12,6 @@ class LayerDense(Layer):
             input_size: Number of input neurones
             output_size: Number of output neurones
         """
-        super().__init__()
         self.weights = np.random.rand(input_size, output_size) - 0.5
         self.biases = np.random.rand(1, output_size) - 0.5
         
@@ -40,7 +39,7 @@ class LayerDense(Layer):
             output_error: dE/dY, the error of this output
             learning_rate: A scalar for the effect of this propogation, a
         Returns:
-            input_error: The calculated input error, dE/dX
+            input_error: The calculated layer input error, dE/dX
         """
         input_error = np.dot(output_error, self.weights.T) #T means the matrix's transposition, see docs for more.
         weights_error = np.dot(self.inputs.T, output_error)
