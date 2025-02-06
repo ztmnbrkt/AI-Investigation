@@ -1,7 +1,7 @@
-from layer import Layer
 import numpy as np
+from layers import layer
 
-class LayerDense(Layer):
+class LayerDense(layer.Layer):
     """
     The fully connected dense layer, accepts inputs X and returns outputs Y
     """

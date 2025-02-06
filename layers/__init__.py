@@ -1,1 +1,1 @@
-import layer 
+from layers import layer, layer_dense
