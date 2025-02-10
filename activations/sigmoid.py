@@ -1,7 +1,7 @@
 import numpy as np
 from activations import activation_layer
 
-class Sigmoid(activation_layer):
+class Sigmoid(activation_layer.ActivationLayer):
     def __init__(self):
         ...
     def forward(self, inputs):
@@ -13,3 +13,4 @@ class Sigmoid(activation_layer):
         sigmoid_input = self.forward(self.inputs)
         input_error = output_error * sigmoid_input * (1-sigmoid_input)
         return input_error
+    
