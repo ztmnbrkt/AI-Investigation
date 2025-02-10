@@ -1,12 +1,6 @@
 import numpy as np
 from layers import layer
 
-#todo:
-# - add convolutiuon
-# - add stride functionalilty
-# - add num_kernels func. 
-# - add padding
-
 class Concvolutional(layer.Layer):
     """
     The Convolutional layer, handles batches and supports tensors only.
