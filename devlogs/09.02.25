@@ -1,0 +1,32 @@
+I FINALLY FIGUERED OUT CONVOLUTION.
+  i'm now working with standard convolution, where each input 
+channel is comabined into a single 'spatial location' 
+during convolution. this keeps it so i dont have to deal 
+with three outputs from the layer and combine them later,
+instead i have just one that the later dense laters and 
+activation functions can learn from. it's a good idea to 
+add some normalisation and clipping to avoid the vanashing 
+gradient problem.
+
+  though, this is more compuationally intensive. keeping
+these channels seperate keeps workload light for edge 
+computing. worth looking in to, though not a priority.
+
+  ive been thinking about dataflow for a while - all 
+layers have to take inputs in a common form. it just 
+has to be in tensors; we have the pixels, the images,
+the batches. those logic loops probably also need some 
+commenting...
+
+  also, more on spatial locations:
+  each input had a numebr of chanels and kernels. instead 
+of computing for each channel indivisually, we'll 
+combine them into a single value. instead of referencing
+the number of channels in the logic loop, we will 
+reference what kernel was used at what point.
+-----
+convolutional layer done, now need to make other layers work
+with batches and figure out loading the dataset...
+
+dataflow will all be in the form of tensors to avoid shape 
+errors.

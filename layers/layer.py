@@ -25,12 +25,14 @@ class Layer(ABC):
     @abstractmethod
     def backward(self, output_error, learning_rate):
         """
-        Calculates input error dE/dX, weights error dE/dW and bias error dE/dB for this layers output error dE/dY; 
-        Adjusts W and B accrodingly. See document for more information.
+         Calculates input error dE/dX, weights error dE/dW and bias error dE/dB for this layers output error dE/dY; 
+        Adjusts W and B accrodingly.
         
         Args:
             output_error: dE/dY, the error of this output
-            learning_rate: A scalar for the effect of this back propogation
+            learning_rate: A scalar for the effect of this propogation, a
+        Returns:
+            The calculated layer input error, dE/dX
         """
         self.output_error = output_error
         self.learning_rate = learning_rate
