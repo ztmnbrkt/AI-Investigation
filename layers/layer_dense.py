@@ -3,8 +3,8 @@ from layers import layer
 
 class LayerDense(layer.Layer):
     """
-    The fully connected dense layer. Supports and adapts to both 2D matrices and 4D 
-    tensors.
+    The fully connected dense layer. 
+    Supports and adapts to matrices and tensors.
     """
     def __init__(self, input_size, output_size):
         """
@@ -29,8 +29,7 @@ class LayerDense(layer.Layer):
         Returns:
             Processed data, shape (batch_size, output_size)
         """
-
-        # Autoflatten
+        ## Autoflatten
         self.original_shape = inputs.shape # Retaining original shape
         if inputs.ndim > 2:
             batch_size = inputs.shape[0]
@@ -53,12 +52,16 @@ class LayerDense(layer.Layer):
         Returns:
             gradent of the error with respect to the input
         """
-        # Calculating gradients
-        input_error = np.dot(output_error, self.weights.T) # T means transposition, see docs for more.
+        ## Calculating gradients
         weights_error = np.dot(self.inputs.T, output_error)
         bias_error = np.sum(output_error, axis=0, keepdims=True) # Working in terms of batches.
+        input_error = np.dot(output_error, self.weights.T) # T means transposition, see docs for more.
 
-        # Adjusting learnable params.:
+        ## Auto-reshape
+        if self.original_shape.ndim > 2:
+            input_error = input_error.reshape(self.original_shape)
+
+        ## Adjusting learnable params:
         self.weights -= learning_rate * weights_error
         self.biases -= learning_rate * bias_error
         return input_error

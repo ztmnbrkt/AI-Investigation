@@ -4,7 +4,6 @@ from layers import layer
 class Concvolutional(layer.Layer):
     """
     The Convolutional layer, handles batches and supports tensors only.
-
     """
     def __init__(self, input_shape, padding = 0, stride = 1, kernel_size = 3, num_kernels = 1): 
         self.input_shape = input_shape 
@@ -74,8 +73,8 @@ class Concvolutional(layer.Layer):
                         dK[k] += output_error[i, k, h, w] * region
                         dX[i, :, h_start:h_end, w_start:w_end] += output_error[i, k, h, w] * self.kernels[k]
         
-        # Again, lack of use of dimention 1 is for spatial locations. See docs.
-        # The reshape function is to ensure we dont get shape-related issues.
+        # Again, lack of use of dimention 1 is for Spatial Locations. See docs.
+        # The reshape function avoids shape-related issues.
         
         # Adjusting learnable params.:
         self.kernels -= learning_rate * dK

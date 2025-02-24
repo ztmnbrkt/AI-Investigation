@@ -1,0 +1,12 @@
+there's a lot of small things, mainly about python and how it 
+works, that people forget or dont bother to explain. heres a 
+list that should be included in the writeup:
+    - calling [matrix].shape returns its shape as an array of
+      rank of however many dimesions it has, the magnitude of 
+      each being that of the dimension. for example;
+        a batch of three channel 28x28 bit images (coloured 
+        images) would return [1, 3, 28, 28]
+    - when people say dX, they're really saying dE/dX, or the
+      gradient of the error with respect to some variable. 
+      more simply, how quickly the error increases for at the 
+      value of a variable.

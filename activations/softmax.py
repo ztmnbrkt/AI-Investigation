@@ -11,21 +11,26 @@ class SoftMax(activation_layer.ActivationLayer):
     
     def forward(self, inputs):
         """
-        Calculates SoftMax for all inputs, outputting probalbillities for number of inputs.
+        Exponentiates and normalises all inputs.
+        Supports and adapts to matrices and tensors.
         """
-        exponential_values = np.exp(inputs - np.max(inputs, keepdims = True))
-        probalbillities = exponential_values / np.sum(exponential_values, keepdims = True) #when adding batches, add param: axis = 1
+        ## Autoflatten
+        self.original_shape = inputs.shape
+        if inputs.ndim > 2:
+            batch_size = inputs.shape[0]
+            inputs = inputs.reshape(batch_size, -1)
+
+        exponential_values = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
+        # np.max() clips the values so values dont explode.
+
+        probalbillities = exponential_values / np.sum(exponential_values, axis=1, keepdims=True) 
+
         self.output = probalbillities
         return self.output
-        ...
     
-    def backward(self):
+    def backward(self, output_error, learning_rate):
         """
-        SoftMax's derivative is a Jacobian matrix, it doesnt really have a back propogation.
-
-
-
-        Returns 
+        Returns the error of the next function, SoftMax's derrivative is 0.
         """
-        ...
+        return output_error
     
