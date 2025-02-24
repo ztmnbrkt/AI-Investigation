@@ -28,10 +28,10 @@ class Concvolutional(layer.Layer):
         output_height = (height - self.kernel_size) + 1
         output_width = (width - self.kernel_size) + 1
         
-        # Initialising output store
+        # Initialising output variable
         self.output = np.zeros((batch_size, self.num_kernels, output_height, output_width))
         
-        # Looping through in input to complete convolution:
+        # Looping through input batch to complete convolution:
         for i in range(batch_size):
             for k in range(self.num_kernels):
                 for h in range(output_height):
