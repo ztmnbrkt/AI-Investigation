@@ -23,9 +23,9 @@ class SoftMax(activation_layer.ActivationLayer):
         exponential_values = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
         # np.max() clips the values so values dont explode.
 
-        probalbillities = exponential_values / np.sum(exponential_values, axis=1, keepdims=True) 
+        probabillities = exponential_values / np.sum(exponential_values, axis=1, keepdims=True) 
 
-        self.output = probalbillities
+        self.output = probabillities
         return self.output
     
     def backward(self, output_error, learning_rate):
@@ -33,4 +33,3 @@ class SoftMax(activation_layer.ActivationLayer):
         Returns the error of the next function, SoftMax's derrivative is 0.
         """
         return output_error
-    
