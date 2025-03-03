@@ -1,6 +1,6 @@
 from keras import datasets
+
 from layers import layer_dense
-#from layers.convolutional import Convolutional
 from activations import relu
 from activations import softmax
 
@@ -10,7 +10,7 @@ assert x_train.shape == (60000, 28, 28)
 network = [layer_dense.LayerDense(28**2, 50), 
            relu.ReLU(),
            layer_dense.LayerDense(28**2, 10),
-           softmax.Softmax()]
+           softmax.SoftMax()]
 
 def predict(network, input):
     output = input # Avoids writing another loop for the inputs
