@@ -19,8 +19,8 @@ Batch = np.array([
      [ 0, 12,  0],
      [ 0,  0,-25]]])
 
-a1 = relu.ReLU()
-a2 = softmax.SoftMax()
+a1 = relu.relu.ReLU()
+a2 = softmax.softmax.Softmax()
 
 print(a1.forward(Batch))
 print(a2.forward(Batch))

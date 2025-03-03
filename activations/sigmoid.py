@@ -2,8 +2,6 @@ import numpy as np
 from activations import activation_layer
 
 class Sigmoid(activation_layer.ActivationLayer):
-    def __init__(self):
-        ...
     def forward(self, inputs):
         self.inputs = inputs
         self.outputs = 1 / (1 + np.exp(-inputs))

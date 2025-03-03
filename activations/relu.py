@@ -4,9 +4,6 @@ class ReLU(activation_layer.ActivationLayer):
     """
     Rectified Linear Unit activation - removes negative values from the input data.
     """
-    def __init__(self):
-        ...
-    
     def forward(self, inputs):
         """
         Returns the maximum value between 0 and every input element, replacing negative elements with 0,

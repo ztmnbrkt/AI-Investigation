@@ -50,6 +50,10 @@ class Concvolutional(layer.Layer):
         return self.output
 
     def backward(self, output_error, learning_rate):
+        """
+        Note that, whilst writing this section of the program, I found it easier to follow
+        the "semi-mathematical" notation I have used here, exhanging "output_error" for dY.
+        """
         dX = np.zeros_like(self.kernels) # Input error
         dK = np.zeros_like(self.kernels) # Kernel error
         dB = np.sum(output_error, axis=(0, 2, 3)).reshape(self.biases.shape) # Bias error
