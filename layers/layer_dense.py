@@ -17,7 +17,7 @@ class LayerDense(layer.Layer):
         self.biases = np.random.rand(1, output_size) - 0.5
         
 
-    def forward(self, inputs):
+    def forward(self, input):
         """
         Calculates the dot product of inputs and weights, adding biases.
         Auto-flattens 4D input.
@@ -30,16 +30,26 @@ class LayerDense(layer.Layer):
             Processed data, shape (batch_size, output_size)
         """
         ## Autoflatten
-        self.original_shape = inputs.shape # Retaining original shape
+        self.original_shape = input.shape # Retaining original shape
+        
+        if input.ndim == 2:
+            input = input.reshape(1, -1)
+
+        '''
         if inputs.ndim > 2:
             batch_size = inputs.shape[0]
             inputs = inputs.reshape(batch_size, -1) # Flattening
-
-        self.inputs = inputs
+        '''
+        #### NEEDS FIXING
+        if input.ndim == 4:
+            for i in range(input[0]):
+                input = input[i]
+            ...
+        self.input = input
 
         # Forward pass
-        self.outputs = np.dot(self.inputs, self.weights) + self.biases
-        return self.outputs
+        self.output = np.dot(self.input, self.weights) + self.biases
+        return self.output
 
     
     def backward(self, output_error, learning_rate):
@@ -53,7 +63,7 @@ class LayerDense(layer.Layer):
             gradent of the error with respect to the input
         """
         ## Calculating gradients
-        weights_error = np.dot(self.inputs.T, output_error)
+        weights_error = np.dot(self.input.T, output_error)
         bias_error = np.sum(output_error, axis=0, keepdims=True) # Working in terms of batches.
         input_error = np.dot(output_error, self.weights.T) # T means transposition, see docs for more.
 

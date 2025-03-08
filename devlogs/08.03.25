@@ -1,0 +1,12 @@
+testing!
+
+mnist0.py
+    error:  dense layer gives dim error on forward function
+    bug:    forgot to split the data into batches, reulting in a single layer recieving the entire training
+            set...
+    fix:    split the data into batches, set training loop to account for batches
+
+    bug: i forgot to flatten the inputs per image, and not per batch, in the dense layers.
+    fix:  fix the flattening function, loop around batches
+
+    so far, the prediction algo works when inputting an image. now testing batches...

@@ -5,8 +5,8 @@
 from keras import datasets
 import numpy as np
 from layers import layer_dense
-from activations import relu
-from activations import softmax
+from activations import relu, softmax, error_functions
+
 
 ## The keras.io recomended way to load this dataset
 (x_train, y_train), (x_test, y_test) = datasets.mnist.load_data()
@@ -24,16 +24,15 @@ def batch(input):
          output[b] = input[(b-1)*100:b*100,:,:] # [b, i, w, h]
     return output
 '''
+
+## Should combine these into a "pre-process data", streamlines process
 # Batch the datasets
 def batch(input, num_batches):
     return np.array(np.array_split(input, num_batches))
-    
-    
+# Adds a colour channel to maintain compatibillity with layers
+def add_colour_channel(input):
+    return input[:, :, np.newaxis, :, :]
 
-network = [layer_dense.LayerDense(28**2, 50), 
-           relu.ReLU(),
-           layer_dense.LayerDense(50, 10),
-           softmax.SoftMax()]
 
 def predict(network, input):
     output = input # Avoids writing another loop for the inputs
@@ -60,9 +59,27 @@ def train(network, error, activation, x_train, y_train, batches, epochs = 100, l
 
     ...
 
+
+'''
+## Custom Single Image
+X = np.array([1, 1, 1, 1, 1])
+network = [layer_dense.LayerDense(5, 5), 
+           relu.ReLU(),
+           layer_dense.LayerDense(5, 5),
+           softmax.SoftMax()]
+predict(network, X)
+'''
+
+## MNIST Single Image
 X = np.array(batch(x_train, 100))
-batches = X[0]
-image = x_train[np.random.randint(60000), :, :]
-predict(network, image)
+X = add_colour_channel(X)
+network = [layer_dense.LayerDense(28**2, 50), 
+           relu.ReLU(),
+           layer_dense.LayerDense(50, 10),
+           softmax.SoftMax()]
+#image = x_train[np.random.randint(60000), :, :]
+predict(network, X)
 
 print("completed")
+
+
