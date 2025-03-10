@@ -29,21 +29,16 @@ class LayerDense(layer.Layer):
         Returns:
             Processed data, shape (batch_size, output_size)
         """
-        ## Autoflatten
         self.original_shape = input.shape # Retaining original shape
         
+        ## Autoflatten image
         if input.ndim == 2:
             input = input.reshape(1, -1)
 
-        '''
-        if inputs.ndim > 2:
-            batch_size = inputs.shape[0]
-            inputs = inputs.reshape(batch_size, -1) # Flattening
-        '''
-        #### NEEDS FIXING
+        ## Autoflatten 4D
         if input.ndim == 4:
-            for i in range(input[0]):
-                input = input[i]
+            batch_size, channel = input.shape[0], input.shape[1]
+            input = input.reshape((batch_size, channel, -1))
             ...
         self.input = input
 
@@ -63,15 +58,15 @@ class LayerDense(layer.Layer):
             gradent of the error with respect to the input
         """
         ## Calculating gradients
-        weights_error = np.dot(self.input.T, output_error)
-        bias_error = np.sum(output_error, axis=0, keepdims=True) # Working in terms of batches.
-        input_error = np.dot(output_error, self.weights.T) # T means transposition, see docs for more.
+        dW = np.dot(self.input.T, output_error)
+        dB = np.sum(output_error, axis=0, keepdims=True) # Working in terms of batches.
+        dX = np.dot(output_error, self.weights.T) # T means transposition, see docs for more.
 
         ## Auto-reshape
         if self.original_shape.ndim > 2:
-            input_error = input_error.reshape(self.original_shape)
+            dX = dX.reshape(self.original_shape)
 
         ## Adjusting learnable params:
-        self.weights -= learning_rate * weights_error
-        self.biases -= learning_rate * bias_error
-        return input_error
+        self.weights -= learning_rate * dW
+        self.biases -= learning_rate * dB
+        return dX

@@ -1,0 +1,4 @@
+according to https://machinelearningmastery.com/difference-between-a-batch-and-an-epoch/,
+"The batch size is a hyperparameter that defines the number of samples to work through 
+ before updating the internal model parameters."
+i dont think thats what im doing.

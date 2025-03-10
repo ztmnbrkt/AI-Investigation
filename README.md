@@ -3,7 +3,7 @@ An Investigation into some machine learning algos. ANN's, Convolution, Recurrenc
 
 The goal of this investigation is to compare 3 different networks on 3 different datasets, comparing efficiency (time to train/error rate) and the effect of convolution on a network.
 
-My real purpose for this is to have deeper understanding of neural networks, what better way to learn  than to program a few myself! 
+My real purpose for this is to have deeper understanding of neural networks, what better way to learn than to program a few myself! 
 
 also idk how to use github.
 
