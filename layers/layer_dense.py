@@ -29,7 +29,8 @@ class LayerDense(layer.Layer):
         Returns:
             Processed data, shape (batch_size, output_size)
         """
-        self.original_shape = input.shape # Retaining original shape
+        input = np.array(input)
+        self.original_shape = np.array(input.shape) # Retaining original shape
         
         ## Autoflatten image
         if input.ndim == 2:
