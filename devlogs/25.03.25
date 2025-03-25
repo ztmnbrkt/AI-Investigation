@@ -1,0 +1,3 @@
+my god it finally works! i need to find a way to shuffle the data though, because its damn slow on the cpu.
+
+convolution needs a forward and backward mode that ignores batches

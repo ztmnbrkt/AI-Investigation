@@ -1,19 +1,23 @@
 import numpy as np
 from layers import layer
 
-class Concvolutional(layer.Layer):
+class Convolutional(layer.Layer):
     """
     The Convolutional layer, handles batches and supports tensors only.
     """
     def __init__(self, input_shape, padding = 0, stride = 1, kernel_size = 3, num_kernels = 1): 
-        self.input_shape = input_shape 
+        """
+        Initialises the convolutional layer, generating random kernels and biases.
+        Input shape should be in the form (channel, height, width).
+        """
+        self.input_shape = input_shape
         self.padding = padding
         self.stride = stride
         self.kernel_size = kernel_size
         self.num_kernels = num_kernels
 
         self.kernels = np.random.randn(num_kernels, input_shape[0], kernel_size, kernel_size) # Initialising kernels
-        self.biases = np.zeros(self.kernels.shape[0], 1) # Generating biases, initially 0, one per kernel
+        self.biases = np.zeros((self.kernels.shape[0], 1)) # Generating biases, initially 0, one per kernel
         ...
 
     def forward(self, inputs):
