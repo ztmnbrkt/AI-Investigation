@@ -18,21 +18,43 @@ class Network():
         #print(f"Prediction: {np.argmax(output)}")
         return output
 
-    def train(self, x_train, y_train, epochs=100, learning_rate=0.01):
-        for e in range(epochs):
-            error = 0
-            for x, y in zip(x_train, y_train):
-                ## Forward pass
-                output = self.predict_single(x)
+    def train(self, x_train, y_train, epochs=100, batches=0, learning_rate=0.01):
+        """
+        Initiates network training loop.
+        
+        Args:
+            x_train (list or numpy.ndarray): The input training data.
 
-                ## Error calculation
-                error += self.activation.forward(y, output)
+            y_train (list or numpy.ndarray): The target training data.
 
-                ## Backward pass
-                error_rate = self.activation.backward(y, output)
-                for layer in reversed(self.network):
-                    error_rate = layer.backward(error_rate, learning_rate)
-        print(f"Epoch: {e}, Error: {error}")
+            epochs (int, optional): The number of training iterations. Defaults to 100.
+
+            batches (int, optional): The number of batches to divide the data into. 
+
+            If 0, the entire dataset is used for each epoch. Defaults to 0.
+
+            learning_rate (float, optional): The step size for updating weights during 
+            backpropagation. Defaults to 0.01.
+        Returns:
+            None
+        """
+        if batches !=0:
+            pass
+        else:
+            for e in range(epochs):
+                error = 0
+                for x, y in zip(x_train, y_train):
+                    ## Forward pass
+                    output = self.predict_single(x)
+
+                    ## Error calculation
+                    error += self.activation.forward(y, output)
+
+                    ## Backward pass
+                    error_rate = self.activation.backward(y, output)
+                    for layer in reversed(self.network):
+                        error_rate = layer.backward(error_rate, learning_rate)
+            print(f"Epoch: {e}, Error: {error}")
 
 network = Network()
 network.add_layer(convolutional.Convolutional([1, 28, 28]))
