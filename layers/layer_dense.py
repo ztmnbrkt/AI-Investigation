@@ -41,6 +41,10 @@ class LayerDense(layer.Layer):
             batch_size, channel = input.shape[0], input.shape[1]
             input = input.reshape((batch_size, channel, -1))
             ...
+
+        if input.ndim == 3:
+            channel = input.shape[0]
+            input = input.reshape((channel, -1))
         self.input = input
 
         # Forward pass
@@ -64,8 +68,7 @@ class LayerDense(layer.Layer):
         dX = np.dot(output_error, self.weights.T) # T means transposition, see docs for more.
 
         ## Auto-reshape
-        if self.original_shape.ndim > 2:
-            dX = dX.reshape(self.original_shape)
+        dX = dX.reshape(self.original_shape)
 
         ## Adjusting learnable params:
         self.weights -= learning_rate * dW

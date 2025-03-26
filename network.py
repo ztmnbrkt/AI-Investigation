@@ -1,7 +1,7 @@
 from keras import datasets
 import numpy as np
 from layers import layer_dense, convolutional
-from activations import relu, softmax, error_functions
+from activations import relu, softmax, error_functions, sigmoid
 
 class Network():
     def __init__(self, network=[], activaiton=error_functions.BinaryCrossEntropy()):
@@ -57,10 +57,11 @@ class Network():
             print(f"Epoch: {e}, Error: {error}")
 
 network = Network()
-#network.add_layer(convolutional.Convolutional([1, 28, 28]))
+network.add_layer(convolutional.Convolutional([1, 28, 28]))
 network.add_layer(layer_dense.LayerDense(28**2, 128))
-network.add_layer(relu.ReLU())
+network.add_layer(sigmoid.Sigmoid())
 network.add_layer(layer_dense.LayerDense(128, 10))
+network.add_layer(relu.ReLU())
 network.add_layer(softmax.SoftMax())
 
 (x_train, y_train), (x_test, y_test) = datasets.mnist.load_data()
