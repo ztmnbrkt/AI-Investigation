@@ -2,3 +2,12 @@ so i think its working, but batches arent and im not sure how they should.
 scalling back for now to have a somewhat functioning project. but i need 
 to shuffle the data so the network classifies more than just zeros.
 also convolutional layer outputs 1*26*26 when stride=1 for some reason???
+
+fixed the convolutional, there were alot of errors due to not instantiating 
+things like dX correctly. Also, there was an error in the logic for how to 
+handle input shapes [i, h, w] and [h, w], fixed those with the "testing" 
+blocks. another error was dX defaulted to unit8 datatype, changed it to 
+float.
+
+next need to do the onehot encoding for the error functions, then try and
+save and load the networks with a csv.
