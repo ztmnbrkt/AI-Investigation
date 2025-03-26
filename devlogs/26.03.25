@@ -1,0 +1,4 @@
+so i think its working, but batches arent and im not sure how they should.
+scalling back for now to have a somewhat functioning project. but i need 
+to shuffle the data so the network classifies more than just zeros.
+also convolutional layer outputs 1*26*26 when stride=1 for some reason???

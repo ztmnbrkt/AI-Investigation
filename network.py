@@ -57,7 +57,7 @@ class Network():
             print(f"Epoch: {e}, Error: {error}")
 
 network = Network()
-network.add_layer(convolutional.Convolutional([1, 28, 28]))
+#network.add_layer(convolutional.Convolutional([1, 28, 28]))
 network.add_layer(layer_dense.LayerDense(28**2, 128))
 network.add_layer(relu.ReLU())
 network.add_layer(layer_dense.LayerDense(128, 10))
