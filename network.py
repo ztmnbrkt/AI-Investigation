@@ -18,7 +18,7 @@ class Network():
         #print(f"Prediction: {np.argmax(output)}")
         return output
 
-    def train(self, x_train, y_train, epochs=100, batches=0, learning_rate=0.01):
+    def train(self, x_train, y_train, epochs=100, batches=0, learning_rate=0.1):
         """
         Initiates network training loop.
         
@@ -49,6 +49,7 @@ class Network():
 
                     ## Error calculation
                     error += self.activation.forward(y, output)
+                    error /= len(x_train) # averaging out error
 
                     ## Backward pass
                     error_rate = self.activation.backward(y, output)
@@ -56,13 +57,43 @@ class Network():
                         error_rate = layer.backward(error_rate, learning_rate)
             print(f"Epoch: {e}, Error: {error}")
 
-network = Network()
+    def pre_process(self, x, y, classes=10, limit=100):
+        
+        i, h, w = np.array(x).shape
+        all_indices = []
+        
+        ## Find all label indices upto a limit
+        for label in range(classes):
+            class_indices = np.where(y == label)[0][:limit]
+            all_indices.append(class_indices)
+        
+        # Collapse to single array
+        all_indices= np.hstack(all_indices)
+
+        # Shuffle
+        all_indices = np.random.permutation(all_indices)
+
+        # Select data
+        x, y = x[all_indices], y[all_indices]
+
+        ## Reshape input to [number_samples, x_shape], normalising to avoid overflow
+        x = x.reshape(len(x), 1, h, w)
+        #x = x.astype(float) /255
+
+        ## OneHot encode labels, reshape to [number_samples, classes, label]
+        y = np.eye(classes)[y] 
+        y = y.reshape(len(y), classes, 1)
+        
+        return x, y
+
+
+network = Network(activaiton=error_functions.CategoricalCrossEntropy())
 network.add_layer(convolutional.Convolutional([1, 28, 28]))
 network.add_layer(layer_dense.LayerDense(28**2, 128))
-network.add_layer(sigmoid.Sigmoid())
-network.add_layer(layer_dense.LayerDense(128, 10))
 network.add_layer(relu.ReLU())
+network.add_layer(layer_dense.LayerDense(128, 10))
 network.add_layer(softmax.SoftMax())
 
 (x_train, y_train), (x_test, y_test) = datasets.mnist.load_data()
-network.train(x_train, y_train)
+network.pre_process(x_train, y_train, limit=10)
+network.train(x_train, y_train, learning_rate=0.001)
