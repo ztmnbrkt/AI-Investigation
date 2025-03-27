@@ -1,0 +1,7 @@
+theres an error in the dense layer auto-flattening, the shape is wrong. need to fix that
+
+even after clipping im getting overflows for bcross entropy. even then binary is wrong,
+needed to use categorical. 
+
+fixed the loss function, but now im till stuck with the autoflattening giving me the wrong
+shape.

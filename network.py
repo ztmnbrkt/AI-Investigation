@@ -85,15 +85,3 @@ class Network():
         y = y.reshape(len(y), classes, 1)
         
         return x, y
-
-
-network = Network(activaiton=error_functions.CategoricalCrossEntropy())
-network.add_layer(convolutional.Convolutional([1, 28, 28]))
-network.add_layer(layer_dense.LayerDense(28**2, 128))
-network.add_layer(relu.ReLU())
-network.add_layer(layer_dense.LayerDense(128, 10))
-network.add_layer(softmax.SoftMax())
-
-(x_train, y_train), (x_test, y_test) = datasets.mnist.load_data()
-network.pre_process(x_train, y_train, limit=10)
-network.train(x_train, y_train, learning_rate=0.001)
